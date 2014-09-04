@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<databaseChangeLog>
+
+    <changeSet author="Artyom (generated)" id="1409779777750-1" context="main">
+        <createTable tableName="accounts">
+            <column name="client_id" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="number" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="created" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="settlement" name="type" type="ENUM('card_debet', 'card_credit', 'settlement')">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="yes" name="is_active" type="ENUM('yes', 'no')">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cardsurname" type="VARCHAR(30)"/>
+            <column name="cardnumber" type="VARCHAR(30)"/>
+            <column name="carddate" type="VARCHAR(5)"/>
+            <column name="cardcvv" type="VARCHAR(3)"/>
+            <column name="ballance" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="remark" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Artyom (generated)" id="1409779777750-2" context="main">
+        <createTable tableName="banks">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="bank_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="country_of_origin" type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="remarks" type="VARCHAR(100)"/>
+            <column defaultValue="yes" name="is_active" type="ENUM('yes', 'no')">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Artyom (generated)" id="1409779777750-3" context="main">
+        <createTable tableName="clients">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="surname" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="personal_code" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="citizenship" type="VARCHAR(2)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Artyom (generated)" id="1409779777750-4" context="main">
+        <createTable tableName="transactions">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="client_id" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recipient_bank_id" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recipient_account" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recipient_name" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recipient_surname" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recipient_personal_code" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="CURRENT_TIMESTAMP" name="date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sum" type="FLOAT(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transaction_details" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="remarks" type="VARCHAR(100)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Artyom (generated)" id="1409779777750-5" context="main">
+        <addPrimaryKey columnNames="number" constraintName="PRIMARY" tableName="accounts"/>
+    </changeSet>
+
+    <changeSet author="Artyom (generated)" id="1409779777750-6" context="main">
+        <addUniqueConstraint columnNames="cardnumber" constraintName="cardnumber" deferrable="false" disabled="false" initiallyDeferred="false" tableName="accounts"/>
+    </changeSet>
+
+    <changeSet author="Artyom (generated)" id="1409779777750-7" context="main">
+        <addUniqueConstraint columnNames="personal_code" constraintName="personal_code" deferrable="false" disabled="false" initiallyDeferred="false" tableName="clients"/>
+    </changeSet>
+
+    <changeSet author="Artyom (generated)" id="1409779777750-8" context="main">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="accounts" constraintName="accounts_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="clients"/>
+    </changeSet>
+
+    <changeSet author="Artyom (generated)" id="1409779777750-9" context="main">
+        <addForeignKeyConstraint baseColumnNames="recipient_bank_id" baseTableName="transactions" constraintName="transactions_ibfk_1" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="banks"/>
+    </changeSet>
+
+    <changeSet author="Artyom (generated)" id="1409779777750-10" context="main">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="transactions" constraintName="transactions_ibfk_2" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="clients"/>
+    </changeSet>
+
+</databaseChangeLog>
