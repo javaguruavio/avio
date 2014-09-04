@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
-<databaseChangeLog>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet author="Artyom (generated)" id="1409779777750-1" context="main">
         <createTable tableName="accounts">
@@ -35,6 +39,9 @@
             <column autoIncrement="true" name="id" type="INT(10)">
                 <constraints primaryKey="true"/>
             </column>
+            <column name="swift_code" type="INT(11)">
+                <constraints nullable="false"/>
+            </column>
             <column name="bank_name" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
@@ -59,7 +66,7 @@
             <column name="surname" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="personal_code" type="INT(10)">
+            <column name="personal_code" type="VARCHAR(15)">
                 <constraints nullable="false"/>
             </column>
             <column name="citizenship" type="VARCHAR(2)">

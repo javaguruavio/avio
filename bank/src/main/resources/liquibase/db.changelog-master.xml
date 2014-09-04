@@ -6,6 +6,9 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <include file="liquibase/changelogs/bank1.db.changelog-1.0.xml"/>
+    <include file="/home/artyom/src/JAVA2/avio/bank/src/main/resources/liquibase/changelogs/bank1.db.changelog-1.0.xml"/>
+
+    //to do не могу добиться что бы работал относительный путь к ченч сету
+    <!--include file="liquibase/changelogs/bank1.db.changelog-1.0.xml"/-->
 
 </databaseChangeLog>
